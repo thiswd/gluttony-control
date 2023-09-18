@@ -1,4 +1,4 @@
-FROM ruby:3.2.0
+FROM ruby:3.2.0 AS food-facts
 
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
 
