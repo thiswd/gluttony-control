@@ -10,8 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 0) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_19_183902) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "products", force: :cascade do |t|
+    t.bigint "code", null: false
+    t.string "status"
+    t.datetime "imported_t"
+    t.string "url"
+    t.string "creator"
+    t.integer "created_t"
+    t.integer "last_modified_t"
+    t.string "product_name"
+    t.string "quantity"
+    t.string "brands"
+    t.text "categories"
+    t.text "labels"
+    t.string "cities"
+    t.string "purchase_places"
+    t.string "stores"
+    t.text "ingredients_text"
+    t.text "traces"
+    t.string "serving_size"
+    t.decimal "serving_quantity", precision: 10, scale: 2
+    t.integer "nutriscore_score"
+    t.string "nutriscore_grade"
+    t.string "main_category"
+    t.string "image_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["code"], name: "index_products_on_code", unique: true
+  end
 
 end
