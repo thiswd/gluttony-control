@@ -1,10 +1,15 @@
 require 'zlib'
 
 class Extractor
-  def self.extract(gz_file_path, destination)
+  def self.extract(gz_file_path, destination, records_amount)
     Zlib::GzipReader.open(gz_file_path) do |gz|
       File.open(destination, "wb") do |file|
-        file.write(gz.read)
+        records_amount.times do
+          line = gz.readline
+          file.write(line)
+        rescue EOFError
+          break
+        end
       end
     end
   end
