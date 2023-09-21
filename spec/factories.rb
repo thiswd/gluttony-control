@@ -24,4 +24,10 @@ FactoryBot.define do
     main_category { Faker::Food.fruits }
     image_url { Faker::LoremFlickr.image(size: "400x400", search_terms: ['food']) }
   end
+
+  factory :import_history do
+    imported_at { Time.now }
+    filename { Faker::File.file_name }
+    status { ImportHistory::STATUS.sample }
+  end
 end
