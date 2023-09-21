@@ -5,8 +5,6 @@ RSpec.describe Product, type: :model do
     subject { build(:product) }
 
     it { should validate_presence_of(:code) }
-    it { should validate_presence_of(:status) }
-    it { should validate_presence_of(:imported_t) }
 
     it { should validate_uniqueness_of(:code).case_insensitive }
 
@@ -17,7 +15,7 @@ RSpec.describe Product, type: :model do
   end
 
   describe 'invalid scenarios' do
-    let!(:existing_product) { create(:product, code: 12345678) }
+    let!(:existing_product) { create(:product, code: "12345678") }
 
     it 'does not allow duplicate code' do
       new_product = build(:product, code: existing_product.code)

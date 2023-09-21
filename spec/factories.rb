@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :product do
-    code { Faker::Number.unique.between(from: 20_000_000, to: 99_999_999) }
+    code { Faker::Code.ean(base: 8) }
     status { Product::STATUS.sample }
     imported_t { Time.now }
     url { Faker::Internet.url(host: 'openfoodfacts.org') }
