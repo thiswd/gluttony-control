@@ -1,5 +1,6 @@
 require_relative 'helpers/downloader'
 require_relative 'helpers/extractor'
+require_relative 'helpers/file_names_fatcher'
 
 namespace :import do
   task :open_food_facts, [:limit_records] => :environment do |_, args|
@@ -11,19 +12,9 @@ namespace :import do
 
     BASE_URL = "https://challenges.coode.sh/food/data/json/".freeze
 
-    FILENAMES = %w[
-      products_01.json.gz
-      products_02.json.gz
-      products_03.json.gz
-      products_04.json.gz
-      products_05.json.gz
-      products_06.json.gz
-      products_07.json.gz
-      products_08.json.gz
-      products_09.json.gz
-    ].freeze
+    filenames = FileNamesFetcher.fetch
 
-    FILENAMES.each do |filename|
+    filenames.each do |filename|
       puts "Processing #{filename}"
 
       tmp_file_path = Rails.root.join('tmp', filename)
