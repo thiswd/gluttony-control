@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :product do
-    code { Faker::Number.unique.between(from: 20_000_000, to: 99_999_999) }
+    code { Faker::Code.ean(base: 8) }
     status { Product::STATUS.sample }
     imported_t { Time.now }
     url { Faker::Internet.url(host: 'openfoodfacts.org') }
@@ -23,5 +23,11 @@ FactoryBot.define do
     nutriscore_grade { %w[a b c d e].sample }
     main_category { Faker::Food.fruits }
     image_url { Faker::LoremFlickr.image(size: "400x400", search_terms: ['food']) }
+  end
+
+  factory :import_history do
+    imported_at { Time.now }
+    filename { Faker::File.file_name }
+    status { ImportHistory::STATUS.sample }
   end
 end
