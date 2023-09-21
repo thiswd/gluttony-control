@@ -10,12 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_19_183902) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_19_195009) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "import_histories", force: :cascade do |t|
+    t.datetime "imported_at", null: false
+    t.string "filename", null: false
+    t.string "status", null: false
+    t.integer "records_processed", default: 0
+    t.integer "records_imported", default: 0
+    t.text "error_details"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "products", force: :cascade do |t|
-    t.bigint "code", null: false
+    t.integer "code", null: false
     t.string "status"
     t.datetime "imported_t"
     t.string "url"
