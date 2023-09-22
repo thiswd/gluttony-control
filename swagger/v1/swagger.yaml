@@ -45,6 +45,90 @@ paths:
                     items:
                       $ref: '#/components/schemas/Product'
 
+  /products/{code}:
+    get:
+      summary: Retrieve a single product by its code
+      parameters:
+        - in: path
+          name: code
+          schema:
+            type: string
+          required: true
+          description: The unique code of the product.
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        404:
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    put:
+      summary: Update a product by its code
+      parameters:
+        - in: path
+          name: code
+          schema:
+            type: string
+          required: true
+          description: The unique code of the product.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        200:
+          description: Successful update
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        422:
+          description: Invalid data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    delete:
+      summary: Mark a product as trash by its code
+      parameters:
+        - in: path
+          name: code
+          schema:
+            type: string
+          required: true
+          description: The unique code of the product.
+      responses:
+        200:
+          description: Successfully marked product as trash
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        404:
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
 components:
   schemas:
     Product:
