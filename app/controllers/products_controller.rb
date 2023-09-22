@@ -4,13 +4,19 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :update, :destroy]
 
   def index
-    @products = Product.all
+    page = params[:page] || 1
+    per_page = params[:per_page] || 25
+    @products = Product.page(page).per(per_page)
 
-    if @products.any?
-      render json: @products
-    else
-      render json: { error: "No products found" }, status: :not_found
-    end
+    render json: {
+      pagination: {
+        current_page: @products.current_page,
+        per_page: @products.limit_value,
+        total_pages: @products.total_pages,
+        total_entries: @products.total_count
+      },
+      data: @products
+    }
   end
 
   def show
