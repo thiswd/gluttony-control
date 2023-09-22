@@ -1,6 +1,4 @@
 class ProductsController < ApplicationController
-  ProductsController < ApplicationController
-
   before_action :set_product, only: [:show, :update, :destroy]
 
   def index
@@ -20,28 +18,22 @@ class ProductsController < ApplicationController
   end
 
   def show
-    if @product
-      render json: @product
-    else
-      render json: { error: "Product not found" }, status: :not_found
-    end
+    render json: @product
   end
 
   def update
-    if @product && @product.update(product_params)
+    if @product.update(product_params)
       render json: @product
     else
-      render json: { error: "Product update failed" }, status: :unprocessable_entity
+      render json: {
+        error: "Product update failed: #{@product.errors.full_messages.to_sentence}"
+      }, status: :unprocessable_entity
     end
   end
 
   def destroy
-    if @product
-      @product.update(status: Product::TRASH)
-      render json: { message: "Product marked as #{Product::TRASH}" }
-    else
-      render json: { error: "Product not found" }, status: :not_found
-    end
+    @product.update(status: Product::TRASH)
+    render json: { message: "Product marked as #{Product::TRASH}" }
   end
 
   private
@@ -70,6 +62,6 @@ class ProductsController < ApplicationController
   end
 
   def set_product
-    @product ||= Product.find_by(code: params[:code])
+    @product = Product.find_by!(code: params[:code])
   end
 end
