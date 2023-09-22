@@ -7,6 +7,38 @@ servers:
   - url: http://localhost:3000
 
 paths:
+  /:
+    get:
+      summary: Get system status
+      tags:
+      - System Status
+      description: Fetches the current status of the system including database connectivity, last cron run, uptime, and memory usage.
+      operationId: getSystemStatus
+      responses:
+        '200':
+          description: System status retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  db_status:
+                    type: string
+                    description: The current status of the database.
+                    example: "Database connected"
+                  last_cron_run:
+                    type: string
+                    description: The timestamp of the last cron job run.
+                    example: "09/22/2023 07:40PM"
+                  uptime:
+                    type: string
+                    description: The uptime of the system.
+                    example: "00:57:23"
+                  memory_usage:
+                    type: string
+                    description: The memory usage of the system.
+                    example: "34,474 KB"
+
   /products:
     get:
       summary: Retrieve a list of products
