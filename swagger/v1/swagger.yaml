@@ -1,0 +1,230 @@
+openapi: 3.0.3
+info:
+  title: Gluttony Control API
+  version: "1.0"
+  description: Gluttony Control API is a project that leverages the data from Open Food Facts
+servers:
+  - url: http://localhost:3000
+
+paths:
+  /:
+    get:
+      summary: Get system status
+      tags:
+      - System Status
+      description: Fetches the current status of the system including database connectivity, last cron run, uptime, and memory usage.
+      operationId: getSystemStatus
+      responses:
+        '200':
+          description: System status retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  db_status:
+                    type: string
+                    description: The current status of the database.
+                    example: "Database connected"
+                  last_cron_run:
+                    type: string
+                    description: The timestamp of the last cron job run.
+                    example: "09/22/2023 07:40PM"
+                  uptime:
+                    type: string
+                    description: The uptime of the system.
+                    example: "00:57:23"
+                  memory_usage:
+                    type: string
+                    description: The memory usage of the system.
+                    example: "34,474 KB"
+
+  /products:
+    get:
+      summary: Retrieve a list of products
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+          description: The page number to fetch. Defaults to 1.
+        - in: query
+          name: per_page
+          schema:
+            type: integer
+          description: The number of items per page. Defaults to 25.
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  pagination:
+                    type: object
+                    properties:
+                      current_page:
+                        type: integer
+                      per_page:
+                        type: integer
+                      total_pages:
+                        type: integer
+                      total_entries:
+                        type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Product'
+
+  /products/{code}:
+    get:
+      summary: Retrieve a single product by its code
+      parameters:
+        - in: path
+          name: code
+          schema:
+            type: string
+          required: true
+          description: The unique code of the product.
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        404:
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    put:
+      summary: Update a product by its code
+      parameters:
+        - in: path
+          name: code
+          schema:
+            type: string
+          required: true
+          description: The unique code of the product.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        200:
+          description: Successful update
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        422:
+          description: Invalid data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    delete:
+      summary: Mark a product as trash by its code
+      parameters:
+        - in: path
+          name: code
+          schema:
+            type: string
+          required: true
+          description: The unique code of the product.
+      responses:
+        200:
+          description: Successfully marked product as trash
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        404:
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+        code:
+          type: string
+        status:
+          type: string
+        imported_t:
+          type: string
+          format: date-time
+        url:
+          type: string
+          format: uri
+        creator:
+          type: string
+        created_t:
+          type: integer
+        last_modified_t:
+          type: integer
+        product_name:
+          type: string
+        quantity:
+          type: string
+        brands:
+          type: string
+        categories:
+          type: string
+        labels:
+          type: string
+        cities:
+          type: string
+        purchase_places:
+          type: string
+        stores:
+          type: string
+        ingredients_text:
+          type: string
+        traces:
+          type: string
+        serving_size:
+          type: string
+        serving_quantity:
+          type: number
+        nutriscore_score:
+          type: integer
+        nutriscore_grade:
+          type: string
+        main_category:
+          type: string
+        image_url:
+          type: string
+          format: uri
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
