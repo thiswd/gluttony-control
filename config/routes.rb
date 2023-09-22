@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  namespace :api do
-    namespace :v1 do
-      resources :products
-    end
-  end
+  get '/', to: 'application#status'
+  resources :products, param: :code, only: [:index, :show, :update, :destroy]
 end
