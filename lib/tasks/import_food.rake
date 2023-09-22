@@ -1,11 +1,10 @@
-require_relative 'helpers/downloader'
-require_relative 'helpers/extractor'
-require_relative 'helpers/file_names_fatcher'
+require_relative "helpers/downloader"
+require_relative "helpers/extractor"
+require_relative "helpers/file_names_fatcher"
 
 namespace :import do
   task :open_food_facts, [:limit_records] => :environment do |_, args|
-
-    LIMIT_DEFAULT = 100.freeze
+    LIMIT_DEFAULT = 100
 
     limit_records = args[:limit_records].to_i
     limit_records = LIMIT_DEFAULT if limit_records == 0
@@ -17,8 +16,8 @@ namespace :import do
     filenames.each do |filename|
       puts "Processing #{filename}"
 
-      tmp_file_path = Rails.root.join('tmp', filename)
-      json_file_path = Rails.root.join('tmp', filename.gsub('.gz', ''))
+      tmp_file_path = Rails.root.join("tmp", filename)
+      json_file_path = Rails.root.join("tmp", filename.gsub(".gz", ""))
 
       Downloader.download(BASE_URL + filename, tmp_file_path)
 

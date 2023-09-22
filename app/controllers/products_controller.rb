@@ -38,30 +38,30 @@ class ProductsController < ApplicationController
 
   private
 
-  def product_params
-    params.require(:product).permit(
-      :url,
-      :creator,
-      :product_name,
-      :quantity,
-      :brands,
-      :categories,
-      :labels,
-      :cities,
-      :purchase_places,
-      :stores,
-      :ingredients_text,
-      :traces,
-      :serving_size,
-      :serving_quantity,
-      :nutriscore_score,
-      :nutriscore_grade,
-      :main_category,
-      :image_url
-    )
-  end
+    def product_params
+      params.require(:product).permit(
+        :url,
+        :creator,
+        :product_name,
+        :quantity,
+        :brands,
+        :categories,
+        :labels,
+        :cities,
+        :purchase_places,
+        :stores,
+        :ingredients_text,
+        :traces,
+        :serving_size,
+        :serving_quantity,
+        :nutriscore_score,
+        :nutriscore_grade,
+        :main_category,
+        :image_url
+      )
+    end
 
-  def set_product
-    @product = Product.find_by!(code: params[:code])
-  end
+    def set_product
+      @product = Product.find_by!(code: params[:code])
+    end
 end

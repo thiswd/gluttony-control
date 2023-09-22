@@ -4,6 +4,6 @@ class ChangeCodeTypeInProducts < ActiveRecord::Migration[7.0]
   end
 
   def down
-    change_column :products, :code, :integer, using: 'code::integer'
+    change_column :products, :code, :integer, using: "code::integer"
   end
 end

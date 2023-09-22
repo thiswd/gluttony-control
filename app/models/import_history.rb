@@ -1,5 +1,4 @@
 class ImportHistory < ApplicationRecord
-
   START = "started".freeze
   COMPLETED = "completed".freeze
   FAILED = "failed".freeze
@@ -11,5 +10,4 @@ class ImportHistory < ApplicationRecord
   def formatted_imported_at
     imported_at.strftime("%m/%d/%Y %I:%M%p")
   end
-
 end

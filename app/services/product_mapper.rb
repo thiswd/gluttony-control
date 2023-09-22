@@ -28,16 +28,16 @@ class ProductMapper
 
     private
 
-    def sanitize_code(code)
-      code.to_s.strip.gsub(/\D/, "")
-    end
+      def sanitize_code(code)
+        code.to_s.strip.gsub(/\D/, "")
+      end
 
-    def to_integer(value)
-      value.to_i
-    end
+      def to_integer(value)
+        value.to_i
+      end
 
-    def to_decimal(value)
-      value.to_d
-    end
+      def to_decimal(value)
+        value.to_d
+      end
   end
 end

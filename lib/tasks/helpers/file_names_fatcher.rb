@@ -1,7 +1,7 @@
-require 'open-uri'
+require "open-uri"
 
 class FileNamesFetcher
-  INDEX_URL = 'https://challenges.coode.sh/food/data/json/index.txt'.freeze
+  INDEX_URL = "https://challenges.coode.sh/food/data/json/index.txt".freeze
 
   def self.fetch
     content = URI.open(INDEX_URL).read

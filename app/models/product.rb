@@ -1,5 +1,4 @@
 class Product < ApplicationRecord
-
   before_create :set_status_and_timestamp
 
   PUBLISHED = "published".freeze

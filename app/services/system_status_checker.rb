@@ -11,9 +11,9 @@ class SystemStatusChecker
 
     private
 
-    def memory_usage
-      process_info = Sys::ProcTable.ps.select { |proc| proc.pid == Process.pid }.first
-      process_info.rss
-    end
+      def memory_usage
+        process_info = Sys::ProcTable.ps.select { |proc| proc.pid == Process.pid }.first
+        process_info.rss
+      end
   end
 end

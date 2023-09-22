@@ -1,4 +1,4 @@
-require 'zlib'
+require "zlib"
 
 class Extractor
   def self.extract(gz_file_path, destination, records_amount)

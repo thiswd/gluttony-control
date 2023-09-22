@@ -18,8 +18,8 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
-set :environment, ENV['RAILS_ENV'] || "development"
+set :environment, ENV["RAILS_ENV"] || "development"
 
-every 1.day, at: '4:13 am' do
+every 1.day, at: "4:13 am" do
   rake "import:open_food_facts"
 end
