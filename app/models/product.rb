@@ -4,8 +4,8 @@ class Product < ApplicationRecord
 
   PUBLISHED = "published".freeze
   DRAFT = "draft".freeze
-  ARCHIVED = "archived".freeze
-  STATUS = [PUBLISHED, DRAFT, ARCHIVED].freeze
+  TRASH = "trash".freeze
+  STATUS = [PUBLISHED, DRAFT, TRASH].freeze
 
   validates :code, presence: true
   validates :code, uniqueness: true

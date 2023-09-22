@@ -37,8 +37,8 @@ class ProductsController < ApplicationController
 
   def destroy
     if @product
-      @product.update(status: Product::ARCHIVED)
-      render json: { message: "Product marked as #{Product::ARCHIVED}" }
+      @product.update(status: Product::TRASH)
+      render json: { message: "Product marked as #{Product::TRASH}" }
     else
       render json: { error: "Product not found" }, status: :not_found
     end
