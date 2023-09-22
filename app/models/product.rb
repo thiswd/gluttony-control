@@ -12,6 +12,6 @@ class Product < ApplicationRecord
 
   def set_status_and_timestamp
     self.status = PUBLISHED
-    self.imported_t = Time.now
+    self.imported_t = Time.zone.now
   end
 end

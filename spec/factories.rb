@@ -2,11 +2,11 @@ FactoryBot.define do
   factory :product do
     code { Faker::Code.ean(base: 8) }
     status { Product::STATUS.sample }
-    imported_t { Time.now }
+    imported_t { Time.zone.now }
     url { Faker::Internet.url(host: "openfoodfacts.org") }
     creator { Faker::Internet.username }
     created_t { Faker::Time.between(from: 10.years.ago, to: 1.year.ago).to_i }
-    last_modified_t { Faker::Time.between(from: 1.year.ago, to: Time.now).to_i }
+    last_modified_t { Faker::Time.between(from: 1.year.ago, to: Time.zone.now).to_i }
     product_name { Faker::Food.dish }
     quantity { "#{Faker::Number.between(from: 1, to: 500)} g" }
     brands { Faker::Company.name }
@@ -26,7 +26,7 @@ FactoryBot.define do
   end
 
   factory :import_history do
-    imported_at { Time.now }
+    imported_at { Time.zone.now }
     filename { Faker::File.file_name }
     status { ImportHistory::STATUS.sample }
   end

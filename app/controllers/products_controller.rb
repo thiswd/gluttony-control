@@ -32,7 +32,7 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    @product.update(status: Product::TRASH)
+    @product.update!(status: Product::TRASH)
     render json: { message: "Product marked as #{Product::TRASH}" }
   end
 

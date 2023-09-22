@@ -1,1 +1,1 @@
-$START_TIME = Time.now
+$START_TIME = Time.zone.now

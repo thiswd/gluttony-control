@@ -49,6 +49,6 @@ class ProductImporter
     end
 
     def create_import_history
-      ImportHistory.create!(filename: File.basename(file_path), status: ImportHistory::START, imported_at: Time.now)
+      ImportHistory.create!(filename: File.basename(file_path), status: ImportHistory::START, imported_at: Time.zone.now)
     end
 end

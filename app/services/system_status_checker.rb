@@ -1,8 +1,8 @@
 class SystemStatusChecker
   class << self
     def uptime
-      uptime_seconds = (Time.now - $START_TIME)
-      Time.at(uptime_seconds).strftime("%H:%M:%S")
+      uptime_seconds = (Time.zone.now - $START_TIME)
+      Time.zone.at(uptime_seconds).strftime("%H:%M:%S")
     end
 
     def formatted_memory_usage
