@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: Gluttony Control API
   version: "1.0"
-  description: Gluttony Control API is a project that leverages the data from Open Food Facts
+  description: Gluttony Control API is a project that leverages the data from Open Food Facts, an open database of food products with nutritional information. This project serves as a conduit for accessing and manipulating said data in a structured manner.
 servers:
   - url: http://localhost:3000
 
@@ -42,6 +42,8 @@ paths:
   /products:
     get:
       summary: Retrieve a list of products
+      tags:
+      - Products
       parameters:
         - in: query
           name: page
@@ -80,6 +82,8 @@ paths:
   /products/{code}:
     get:
       summary: Retrieve a single product by its code
+      tags:
+      - Products
       parameters:
         - in: path
           name: code
@@ -103,6 +107,8 @@ paths:
 
     put:
       summary: Update a product by its code
+      tags:
+      - Products
       parameters:
         - in: path
           name: code
@@ -137,6 +143,8 @@ paths:
 
     delete:
       summary: Mark a product as trash by its code
+      tags:
+      - Products
       parameters:
         - in: path
           name: code
