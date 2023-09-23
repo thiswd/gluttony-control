@@ -64,6 +64,38 @@ A distinct class was established to always request the filename data from the Op
 
 The `whenever` gem was integrated to manage scheduled tasks via Cron. The data import task is set to run every day at 4:13 am, ensuring that the application always has the freshest data without manual intervention.
 
+### System Status Endpoint
+
+The root endpoint (`/`) serves as a quick system status check for the API. It provides essential information, such as:
+
+- Database connectivity
+- The last cron job's run timestamp
+- System uptime
+- Memory usage
+
+To retrieve the system's memory usage, the `sys-proctable` gem was employed due to its comprehensive process table inspection capability.
+
+### Product Index Endpoint
+
+For product listing and pagination, the `kaminari` gem was chosen. This gem offers an intuitive interface for paginating ActiveRecord models and provides helpful methods like `current_page`, `total_pages`, and `total_count`. These methods were leveraged to enhance the JSON output, making it more user-friendly and information-rich.
+
+### Product Update Parameters
+
+When designing the parameters allowed for product update actions, careful consideration was given to which attributes could be modified. Fields such as dates (`created_at`, `updated_at`), `status`, and `code` were intentionally excluded from permissible update parameters. This decision stemmed from the understanding that:
+
+- Dates should be managed internally to maintain data integrity and not be altered manually.
+- The `code` is a unique identifier and should remain consistent throughout the product's lifecycle.
+- Modifying the `status` through general update actions could lead to unintentional changes and potential misuse.
+
+### API Documentation with Swagger
+
+Swagger was chosen as the tool for API documentation for several reasons:
+
+- **Interactivity**: Swagger provides an interactive UI that allows users to explore the API and make requests, fostering a more hands-on understanding of the API's capabilities.
+- **Standardization**: Swagger uses the OpenAPI Specification, which is a widely-adopted industry standard for describing RESTful APIs.
+- **Clarity and Completeness**: The visual representation, coupled with structured endpoint descriptions, makes it easier for both developers and non-developers to grasp the API's functionalities.
+- **Integration Ease**: Swagger's toolset integrates seamlessly with many modern development workflows, ensuring that the documentation remains up-to-date with code changes.
+
 ### Acknowledgements
 
 This project was developed as a challenge for [Coodesh](https://coodesh.com).
