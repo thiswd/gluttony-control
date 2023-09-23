@@ -1,7 +1,7 @@
 class SystemStatusChecker
   class << self
     def uptime
-      uptime_seconds = (Time.now - $START_TIME).to_i
+      uptime_seconds = (Time.zone.now - $START_TIME).to_i
 
       hours = uptime_seconds / 3600
       minutes = (uptime_seconds / 60) % 60
