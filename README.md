@@ -2,22 +2,70 @@
 
 Gluttony Control API is a project that leverages the data from [Open Food Facts](https://world.openfoodfacts.org/), an open database of food products with nutritional information. This project serves as a conduit for accessing and manipulating said data in a structured manner.
 
-## Initial Setup
+## Technologies Used
 
-### Docker Configuration
+- **Language**: Ruby 3.2.0
+- **Framework**: Ruby on Rails 7.0.7
+- **Database**: PostgreSQL 15.3
+- **Test**: RSpec, FactoryBot, Shoulda-Matchers
+- **Others**: Docker, Swagger, Kaminari, Rubocop, Whenever, Sys-proctable
 
-- The project is dockerized from the get-go, ensuring consistent environment for development.
-- Containers have been set up for both the Rails API and the PostgreSQL database.
+## Setting Up the Project
 
-### Testing Tools
+### Clone the Repository:
 
-- **RSpec:** Chosen for its expressiveness and ease of use, RSpec is the primary testing tool for the project.
-- **FactoryBot:** A fixture replacement to simplify object creation for tests.
-- **Shoulda-Matchers:** Provides simple one-liner tests for common Rails functionalities, further speeding up the test-writing process.
+```sh
+git clone git@github.com:thiswd/gluttony-control.git
+cd gluttony-control
+```
 
-### Code Quality and Standards
+### Install Dependencies:
 
-- **Rubocop:** Ensures the code adheres to community-driven Ruby coding standards.
+```sh
+bundle install
+```
+
+### Setup Database:
+
+```sh
+rails db:create
+rails db:migrate
+```
+## Running the Project
+
+### Using Docker:
+
+```sh
+docker-compose up --build
+```
+
+### Using the Terminal:
+Start the Rails server:
+
+```sh
+rails s
+```
+
+## Data Import via Rake Task
+
+You can import product data using the custom rake task provided. Here's how:
+
+```sh
+rails import:open_food_facts[NUMBER_OF_RECORDS]
+```
+Replace `NUMBER_OF_RECORDS` with the number of records you wish to import from each file. If you do not specify a number, it will default to 100 records per file.
+
+## Running the Tests
+
+To run the test suite, execute:
+
+```sh
+rspec .
+```
+
+## Testing the API with Swagger
+
+Navigate to `http://localhost:3000/api-docs/`
 
 ## Design Decisions
 
@@ -99,3 +147,5 @@ Swagger was chosen as the tool for API documentation for several reasons:
 ### Acknowledgements
 
 This project was developed as a challenge for [Coodesh](https://coodesh.com).
+
+ Feedback is always welcome!
