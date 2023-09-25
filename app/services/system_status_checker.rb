@@ -1,5 +1,7 @@
 class SystemStatusChecker
   class << self
+    include ActiveSupport::NumberHelper
+
     def uptime
       uptime_seconds = (Time.zone.now - $START_TIME).to_i
 
@@ -11,7 +13,7 @@ class SystemStatusChecker
     end
 
     def formatted_memory_usage
-      "#{ActiveSupport::NumberHelper.number_to_delimited(memory_usage)} KB"
+      number_to_human_size(memory_usage, separator: ",")
     end
 
     private
