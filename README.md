@@ -144,6 +144,13 @@ Swagger was chosen as the tool for API documentation for several reasons:
 - **Clarity and Completeness**: The visual representation, coupled with structured endpoint descriptions, makes it easier for both developers and non-developers to grasp the API's functionalities.
 - **Integration Ease**: Swagger's toolset integrates seamlessly with many modern development workflows, ensuring that the documentation remains up-to-date with code changes.
 
+### Video Presentation
+
+For a walkthrough of the Gluttony Control API's functionalities, watch my screen sharing session:
+
+[![Watch the video](https://cdn.loom.com/sessions/thumbnails/8dfb0f650f324dd6b9ac1139da0cbd56-with-play.gif)](https://www.loom.com/share/8dfb0f650f324dd6b9ac1139da0cbd56?sid=d1c9b502-5960-461b-9b56-4c0d8499b549)
+
+
 ### Acknowledgements
 
 This project was developed as a challenge for [Coodesh](https://coodesh.com).
