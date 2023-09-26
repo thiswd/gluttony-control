@@ -1,13 +1,8 @@
-require "open-uri"
+require_relative "base_http_service"
 
-class Downloader
+class Downloader < BaseHttpService
   def self.download(url, destination)
-    File.binwrite(destination, URI.open(url).read)
-  rescue OpenURI::HTTPError => e
-    raise "An HTTP error occurred: #{e.message}"
-  rescue Timeout::Error
-    raise "Request to #{url} timed out."
-  rescue StandardError => e
-    raise "An error occurred while downloading from #{url}: #{e.message}"
+    content = fetch_content(URI(url))
+    File.binwrite(destination, content)
   end
 end
