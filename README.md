@@ -135,6 +135,18 @@ When designing the parameters allowed for product update actions, careful consid
 - The `code` is a unique identifier and should remain consistent throughout the product's lifecycle.
 - Modifying the `status` through general update actions could lead to unintentional changes and potential misuse.
 
+### Switching from `URI.open` to `Net::HTTP.get_response`
+
+We initially used `URI.open` for our HTTP requests, but during a code review, we identified potential security risks associated with it. As flagged by Rubocop, using `URI.open` can expose our application to security vulnerabilities.
+
+To address this, we decided to leverage Ruby's built-in `Net::HTTP.get_response`. This method is more secure and gives us better control over the HTTP requests. By making this change, we not only improved the security of our application but also provided a more robust error handling mechanism.
+
+### Introduction of `BaseHttpService` Class
+
+During the refactoring process, it was observed that there was a repetition in the logic for making HTTP requests in multiple classes. To follow the DRY (Don't Repeat Yourself) principle and to enhance code maintainability, we introduced the `BaseHttpService` class.
+
+This centralized class handles the logic for making HTTP requests and error handling, allowing for a consistent approach across the application. By doing this, we've made the code more modular, and future changes related to HTTP requests can be made in one place, affecting all dependent classes.
+
 ### API Documentation with Swagger
 
 Swagger was chosen as the tool for API documentation for several reasons:
