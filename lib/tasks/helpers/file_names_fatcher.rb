@@ -1,21 +1,15 @@
-require "open-uri"
+require_relative "base_http_service"
 
-class FileNamesFetcher
-  INDEX_URL = "https://challenges.coode.sh/food/data/json/index.txt".freeze
+class FileNamesFetcher < BaseHttpService
+  INDEX_URL = URI("https://challenges.coode.sh/food/data/json/index.txt")
 
   def self.fetch
-    content = URI.open(INDEX_URL).read
+    content = fetch_content(INDEX_URL)
 
     if content.empty?
       raise "Failed to fetch file names, response is empty."
     end
 
     content.split("\n")
-  rescue OpenURI::HTTPError => e
-    raise "An HTTP error occurred: #{e.message}"
-  rescue Timeout::Error
-    raise "Request to #{INDEX_URL} timed out."
-  rescue StandardError => e
-    raise "An error occurred while fetching file names: #{e.message}"
   end
 end

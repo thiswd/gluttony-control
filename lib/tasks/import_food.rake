@@ -2,14 +2,13 @@ require_relative "helpers/downloader"
 require_relative "helpers/extractor"
 require_relative "helpers/file_names_fatcher"
 
+LIMIT_DEFAULT = 100
+BASE_URL = "https://challenges.coode.sh/food/data/json/".freeze
+
 namespace :import do
   task :open_food_facts, [:limit_records] => :environment do |_, args|
-    LIMIT_DEFAULT = 100
-
     limit_records = args[:limit_records].to_i
     limit_records = LIMIT_DEFAULT if limit_records == 0
-
-    BASE_URL = "https://challenges.coode.sh/food/data/json/".freeze
 
     filenames = FileNamesFetcher.fetch
 

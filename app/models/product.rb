@@ -1,5 +1,5 @@
 class Product < ApplicationRecord
-  before_create :set_status_and_timestamp
+  before_create :set_default_status_and_timestamp
 
   PUBLISHED = "published".freeze
   DRAFT = "draft".freeze
@@ -10,8 +10,10 @@ class Product < ApplicationRecord
   validates :code, uniqueness: true
   validates :status, inclusion: { in: STATUS }, allow_nil: true
 
-  def set_status_and_timestamp
-    self.status = PUBLISHED
-    self.imported_t = Time.zone.now
-  end
+  private
+
+    def set_default_status_and_timestamp
+      self.status = PUBLISHED
+      self.imported_t = Time.zone.now
+    end
 end
