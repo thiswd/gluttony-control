@@ -9,10 +9,10 @@ class ApplicationController < ActionController::API
     end
 
     def authenticate
-      api_key = request.headers['X-API-KEY']
+      api_key = request.headers["X-API-KEY"]
 
       unless ApiKey.exists?(access_token: api_key)
-        render json: { error: 'Unauthorized' }, status: :unauthorized
+        render json: { error: "Unauthorized" }, status: :unauthorized
       end
     end
 end

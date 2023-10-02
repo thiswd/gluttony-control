@@ -10,5 +10,4 @@ class ApiKey < ApplicationRecord
     def new_access_token
       SecureRandom.hex(20)
     end
-
 end
