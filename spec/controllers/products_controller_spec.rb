@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe ProductsController, type: :controller do
   before(:all) do
-    @api_key = ApiKey.create
+    @api_key = ApiKey.create!
   end
 
   before do
