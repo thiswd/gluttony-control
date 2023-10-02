@@ -1,6 +1,14 @@
 require "rails_helper"
 
 RSpec.describe ProductsController, type: :controller do
+  before(:all) do
+    @api_key = ApiKey.create
+  end
+
+  before do
+    request.headers["X-API-KEY"] = @api_key.access_token
+  end
+
   describe "GET #index" do
     let!(:products) { create_list(:product, 30) }
 
@@ -44,6 +52,17 @@ RSpec.describe ProductsController, type: :controller do
 
       it "returns zero total entries" do
         expect(JSON.parse(response.body)["pagination"]["total_entries"]).to eq(0)
+      end
+    end
+
+    context "without valid API key" do
+      before do
+        request.headers["X-API-KEY"] = "invalid_key"
+        get :index
+      end
+
+      it "returns unauthorized status" do
+        expect(response).to have_http_status(:unauthorized)
       end
     end
   end
