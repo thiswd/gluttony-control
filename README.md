@@ -63,6 +63,21 @@ To run the test suite, execute:
 rspec .
 ```
 
+## Authentication
+
+To access the endpoints of this API, you need an API key. To generate one, run the following task:
+
+```sh
+rails generate:api_key
+```
+
+Once the task is complete, it will display your new API key. Make sure to keep it safe.
+
+When making requests to the API, you'll need to include your API key in the request headers:
+
+- Key: X-API-KEY
+- Value: YourGeneratedApiKey
+
 ## Testing the API with Swagger
 
 Navigate to `http://localhost:3000/api-docs/`
