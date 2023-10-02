@@ -63,6 +63,21 @@ To run the test suite, execute:
 rspec .
 ```
 
+## Authentication
+
+To access the endpoints of this API, you need an API key. To generate one, run the following task:
+
+```sh
+rails generate:api_key
+```
+
+Once the task is complete, it will display your new API key. Make sure to keep it safe.
+
+When making requests to the API, you'll need to include your API key in the request headers:
+
+- Key: X-API-KEY
+- Value: YourGeneratedApiKey
+
 ## Testing the API with Swagger
 
 Navigate to `http://localhost:3000/api-docs/`
@@ -146,6 +161,14 @@ To address this, we decided to leverage Ruby's built-in `Net::HTTP.get_response`
 During the refactoring process, it was observed that there was a repetition in the logic for making HTTP requests in multiple classes. To follow the DRY (Don't Repeat Yourself) principle and to enhance code maintainability, we introduced the `BaseHttpService` class.
 
 This centralized class handles the logic for making HTTP requests and error handling, allowing for a consistent approach across the application. By doing this, we've made the code more modular, and future changes related to HTTP requests can be made in one place, affecting all dependent classes.
+
+### Storing API Keys in the Database
+
+We decided to store the API keys in our database for several reasons:
+
+- **Flexibility**: It allows us to easily manage, revoke, or refresh keys if needed.
+- **Scalability**: As our user base grows, we might want to issue different API keys with varying levels of access or rate limits. Storing them in the database makes such management straightforward.
+- **Persistence**: With API keys in the database, the system remains stateful. If the server restarts or if there's a deployment, the API keys remain valid and uninterrupted.
 
 ### API Documentation with Swagger
 
