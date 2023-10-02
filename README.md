@@ -162,6 +162,14 @@ During the refactoring process, it was observed that there was a repetition in t
 
 This centralized class handles the logic for making HTTP requests and error handling, allowing for a consistent approach across the application. By doing this, we've made the code more modular, and future changes related to HTTP requests can be made in one place, affecting all dependent classes.
 
+### Storing API Keys in the Database
+
+We decided to store the API keys in our database for several reasons:
+
+- **Flexibility**: It allows us to easily manage, revoke, or refresh keys if needed.
+- **Scalability**: As our user base grows, we might want to issue different API keys with varying levels of access or rate limits. Storing them in the database makes such management straightforward.
+- **Persistence**: With API keys in the database, the system remains stateful. If the server restarts or if there's a deployment, the API keys remain valid and uninterrupted.
+
 ### API Documentation with Swagger
 
 Swagger was chosen as the tool for API documentation for several reasons:
