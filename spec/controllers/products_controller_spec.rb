@@ -1,12 +1,10 @@
 require "rails_helper"
 
 RSpec.describe ProductsController, type: :controller do
-  before(:all) do
-    @api_key = ApiKey.create!
-  end
+  let(:api_key) { ApiKey.create! }
 
   before do
-    request.headers["X-API-KEY"] = @api_key.access_token
+    request.headers["X-API-KEY"] = api_key.access_token
   end
 
   describe "GET #index" do
