@@ -7,12 +7,7 @@ class ProductsController < ApplicationController
     @products = Product.page(page).per(per_page)
 
     render json: {
-      pagination: {
-        current_page: @products.current_page,
-        per_page: @products.limit_value,
-        total_pages: @products.total_pages,
-        total_entries: @products.total_count
-      },
+      pagination: pagination_info,
       data: serialized_products
     }
   end
@@ -71,5 +66,14 @@ class ProductsController < ApplicationController
         each_serializer: ProductSerializer,
         view_context:
       ).as_json
+    end
+
+    def pagination_info
+      {
+        current_page: @products.current_page,
+        per_page: @products.limit_value,
+        total_pages: @products.total_pages,
+        total_entries: @products.total_count
+      }
     end
 end
