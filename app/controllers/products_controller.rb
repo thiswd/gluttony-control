@@ -13,17 +13,17 @@ class ProductsController < ApplicationController
         total_pages: @products.total_pages,
         total_entries: @products.total_count
       },
-      data: @products
+      data: serialized_products
     }
   end
 
   def show
-    render json: @product
+    render json: @product, serializer: ProductSerializer, view_context: view_context
   end
 
   def update
     if @product.update(product_params)
-      render json: @product
+      render json: @product, serializer: ProductSerializer, view_context: view_context
     else
       render json: {
         error: "Product update failed: #{@product.errors.full_messages.to_sentence}"
@@ -63,5 +63,13 @@ class ProductsController < ApplicationController
 
     def set_product
       @product = Product.find_by!(code: params[:code])
+    end
+
+    def serialized_products
+      ActiveModel::SerializableResource.new(
+        @products,
+        each_serializer: ProductSerializer,
+        view_context: view_context
+      ).as_json
     end
 end
