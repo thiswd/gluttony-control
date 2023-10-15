@@ -18,12 +18,12 @@ class ProductsController < ApplicationController
   end
 
   def show
-    render json: @product, serializer: ProductSerializer, view_context: view_context
+    render json: @product, serializer: ProductSerializer, view_context:
   end
 
   def update
     if @product.update(product_params)
-      render json: @product, serializer: ProductSerializer, view_context: view_context
+      render(json: @product, serializer: ProductSerializer, view_context:)
     else
       render json: {
         error: "Product update failed: #{@product.errors.full_messages.to_sentence}"
@@ -63,13 +63,15 @@ class ProductsController < ApplicationController
 
     def set_product
       @product = Product.find_by!(code: params[:code])
+    rescue ActiveRecord::RecordNotFound
+      render json: { error: "Product not found" }, status: :not_found
     end
 
     def serialized_products
       ActiveModel::SerializableResource.new(
         @products,
         each_serializer: ProductSerializer,
-        view_context: view_context
+        view_context:
       ).as_json
     end
 end
