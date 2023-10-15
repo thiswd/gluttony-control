@@ -63,8 +63,6 @@ class ProductsController < ApplicationController
 
     def set_product
       @product = Product.find_by!(code: params[:code])
-    rescue ActiveRecord::RecordNotFound
-      render json: { error: "Product not found" }, status: :not_found
     end
 
     def serialized_products

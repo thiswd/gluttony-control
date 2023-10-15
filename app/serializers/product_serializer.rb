@@ -4,8 +4,6 @@ class ProductSerializer < ActiveModel::Serializer
   attribute :links do
     {
       self: instance_options[:view_context].product_url(object.code),
-      update: instance_options[:view_context].product_url(object.code),
-      destroy: instance_options[:view_context].product_url(object.code)
     }
   end
 end
