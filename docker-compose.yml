@@ -10,6 +10,8 @@ services:
       - '5432:5432'
     networks:
       - backend
+    environment:
+      - POSTGRES_PASSWORD=postgres
 
   api:
     depends_on:
@@ -22,6 +24,7 @@ services:
       - '3000:3000'
     environment:
       - DATABASE_HOST=db
+      - POSTGRES_PASSWORD=postgres
     volumes:
       - .:/app
     networks:
@@ -29,7 +32,7 @@ services:
 
 networks:
   backend:
-    name: food_facts_network
+    name: gluttony_control_network
 
 volumes:
   postgres:
