@@ -4,8 +4,8 @@ Gluttony Control API is a project that leverages the data from [Open Food Facts]
 
 ## Technologies Used
 
-- **Language**: Ruby 3.2.0
-- **Framework**: Ruby on Rails 7.0.7
+- **Language**: Ruby 3.2.2
+- **Framework**: Ruby on Rails 7.1.1
 - **Database**: PostgreSQL 15.3
 - **Test**: RSpec, FactoryBot, Shoulda-Matchers
 - **Others**: Docker, Swagger, Kaminari, Rubocop, Whenever, Sys-proctable
