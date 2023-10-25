@@ -8,14 +8,14 @@ default: &default
 
 development:
   <<: *default
-  database: food_facts_development
+  database: gluttony_control_development
 
 test:
   <<: *default
-  database: food_facts_test
+  database: gluttony_control_test
 
 production:
   <<: *default
-  database: food_facts_production
-  username: food_facts
-  password: <%= ENV["FOOD_FACTS_DATABASE_PASSWORD"] %>
+  database: gluttony_control_production
+  username: gluttony_control
+  password: <%= ENV["GLUTTONY_CONTROL_DATABASE_PASSWORD"] %>

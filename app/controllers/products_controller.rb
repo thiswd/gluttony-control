@@ -61,7 +61,7 @@ class ProductsController < ApplicationController
     end
 
     def serialized_products
-      ActiveModel::SerializableResource.new(
+      ActiveModelSerializers::SerializableResource.new(
         @products,
         each_serializer: ProductSerializer,
         view_context:
